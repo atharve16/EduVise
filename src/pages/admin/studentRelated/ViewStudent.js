@@ -48,7 +48,7 @@ const ViewStudent = () => {
     const [rollNum, setRollNum] = useState('');
     const [password, setPassword] = useState('');
     const [sclassName, setSclassName] = useState('');
-    const [studentSchool, setStudentSchool] = useState('');
+    const [studentCollege, setStudentCollege] = useState('');
     const [subjectMarks, setSubjectMarks] = useState('');
     const [subjectAttendance, setSubjectAttendance] = useState([]);
 
@@ -84,7 +84,7 @@ const ViewStudent = () => {
             setName(userDetails.name || '');
             setRollNum(userDetails.rollNum || '');
             setSclassName(userDetails.sclassName || '');
-            setStudentSchool(userDetails.school || '');
+            setStudentCollege(userDetails.college || '');
             setSubjectMarks(userDetails.examResult || '');
             setSubjectAttendance(userDetails.attendance || []);
         }
@@ -348,7 +348,7 @@ const ViewStudent = () => {
                 <br />
                 Class: {sclassName.sclassName}
                 <br />
-                School: {studentSchool.schoolName}
+                College: {studentCollege.collegeName}
                 {
                     subjectAttendance && Array.isArray(subjectAttendance) && subjectAttendance.length > 0 && (
                         <CustomPieChart data={chartData} />

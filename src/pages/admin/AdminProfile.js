@@ -24,9 +24,9 @@ const AdminProfile = () => {
     // const [name, setName] = useState(currentUser.name);
     // const [email, setEmail] = useState(currentUser.email);
     // const [password, setPassword] = useState("");
-    // const [schoolName, setSchoolName] = useState(currentUser.schoolName);
+    // const [collegeName, setCollegeName] = useState(currentUser.collegeName);
 
-    // const fields = password === "" ? { name, email, schoolName } : { name, email, password, schoolName }
+    // const fields = password === "" ? { name, email, collegeName } : { name, email, password, collegeName }
 
     // const submitHandler = (event) => {
     //     event.preventDefault()
@@ -50,7 +50,7 @@ const AdminProfile = () => {
             <br />
             Email: {currentUser.email}
             <br />
-            School: {currentUser.schoolName}
+            College: {currentUser.collegeName}
             <br />
             {/* <Button variant="contained" color="error" onClick={deleteHandler}>Delete</Button> */}
             {/* <Button variant="contained" sx={styles.showButton}
@@ -67,10 +67,10 @@ const AdminProfile = () => {
                             onChange={(event) => setName(event.target.value)}
                             autoComplete="name" required />
 
-                        <label>School</label>
-                        <input className="registerInput" type="text" placeholder="Enter your school name..."
-                            value={schoolName}
-                            onChange={(event) => setSchoolName(event.target.value)}
+                        <label>College</label>
+                        <input className="registerInput" type="text" placeholder="Enter your college name..."
+                            value={collegeName}
+                            onChange={(event) => setCollegeName(event.target.value)}
                             autoComplete="name" required />
 
                         <label>Email</label>

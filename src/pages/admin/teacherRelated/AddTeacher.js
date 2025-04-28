@@ -30,11 +30,11 @@ const AddTeacher = () => {
   const [loader, setLoader] = useState(false)
 
   const role = "Teacher"
-  const school = subjectDetails && subjectDetails.school
+  const college = subjectDetails && subjectDetails.college
   const teachSubject = subjectDetails && subjectDetails._id
   const teachSclass = subjectDetails && subjectDetails.sclassName && subjectDetails.sclassName._id
 
-  const fields = { name, email, password, role, school, teachSubject, teachSclass }
+  const fields = { name, email, password, role, college, teachSubject, teachSclass }
 
   const submitHandler = (event) => {
     event.preventDefault()

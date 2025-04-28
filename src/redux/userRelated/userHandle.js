@@ -13,7 +13,7 @@ import {
     getError,
 } from './userSlice';
 
-const REACT_APP_BASE_URL = "https://eduvise.onrender.com";
+const REACT_APP_BASE_URL = "http://localhost:8080";
 
 export const loginUser = (fields, role) => async (dispatch) => {
     dispatch(authRequest());
@@ -39,24 +39,25 @@ export const registerUser = (fields, role) => async (dispatch) => {
         const result = await axios.post(`${REACT_APP_BASE_URL}/${role}Reg`, fields, {
             headers: { 'Content-Type': 'application/json' },
         });
-        if (result.data.schoolName) {
+        if (result.data.collegeName) {
             dispatch(authSuccess(result.data));
         }
-        else if (result.data.school) {
+        else if (result.data.college) {
             dispatch(stuffAdded());
         }
         else {
             dispatch(authFailed(result.data.message));
         }
     } catch (error) {
+        console.error("Registration error:", error);
+        const errorMessage = error.response?.data?.message || error.message;
         dispatch(authError({
-            message: error.message,
+            message: errorMessage,
             code: error.code,
             status: error.response?.status,
             data: error.response?.data,
             url: error.config?.url,
         }));
-        
     }
 };
 
@@ -105,7 +106,7 @@ export const updateUser = (fields, id, address) => async (dispatch) => {
         const result = await axios.put(`${REACT_APP_BASE_URL}/${address}/${id}`, fields, {
             headers: { 'Content-Type': 'application/json' },
         });
-        if (result.data.schoolName) {
+        if (result.data.collegeName) {
             dispatch(authSuccess(result.data));
         }
         else {
@@ -130,6 +131,7 @@ export const addStuff = (fields, address) => async (dispatch) => {
             dispatch(stuffAdded(result.data));
         }
     } catch (error) {
-        dispatch(authError(error));
+        dispatch(authError(error.response?.data?.message || error.message || "Something went wrong"));
     }
+    
 };

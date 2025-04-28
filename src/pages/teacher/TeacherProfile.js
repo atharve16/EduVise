@@ -11,7 +11,7 @@ const TeacherProfile = () => {
 
   const teachSclass = currentUser.teachSclass
   const teachSubject = currentUser.teachSubject
-  const teachSchool = currentUser.school
+  const teachCollege = currentUser.college
 
   return (
     <>
@@ -21,7 +21,7 @@ const TeacherProfile = () => {
           <ProfileText>Email: {currentUser.email}</ProfileText>
           <ProfileText>Class: {teachSclass.sclassName}</ProfileText>
           <ProfileText>Subject: {teachSubject.subName}</ProfileText>
-          <ProfileText>School: {teachSchool.schoolName}</ProfileText>
+          <ProfileText>College: {teachCollege.collegeName}</ProfileText>
         </ProfileCardContent>
       </ProfileCard>
     </>

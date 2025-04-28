@@ -14,7 +14,7 @@ const StudentComplain = () => {
     const { status, currentUser, error } = useSelector(state => state.user);
 
     const user = currentUser._id
-    const school = currentUser.school._id
+    const college = currentUser.college._id
     const address = "Complain"
 
     const [loader, setLoader] = useState(false)
@@ -25,7 +25,7 @@ const StudentComplain = () => {
         user,
         date,
         complaint,
-        school,
+        college,
     };
 
     const submitHandler = (event) => {

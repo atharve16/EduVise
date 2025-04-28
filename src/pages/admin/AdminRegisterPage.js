@@ -28,26 +28,26 @@ const AdminRegisterPage = () => {
     const [emailError, setEmailError] = useState(false);
     const [passwordError, setPasswordError] = useState(false);
     const [adminNameError, setAdminNameError] = useState(false);
-    const [schoolNameError, setSchoolNameError] = useState(false);
+    const [collegeNameError, setCollegeNameError] = useState(false);
     const role = "Admin"
 
     const handleSubmit = (event) => {
         event.preventDefault();
 
         const name = event.target.adminName.value;
-        const schoolName = event.target.schoolName.value;
+        const collegeName = event.target.collegeName.value;
         const email = event.target.email.value;
         const password = event.target.password.value;
 
-        if (!name || !schoolName || !email || !password) {
+        if (!name || !collegeName || !email || !password) {
             if (!name) setAdminNameError(true);
-            if (!schoolName) setSchoolNameError(true);
+            if (!collegeName) setCollegeNameError(true);
             if (!email) setEmailError(true);
             if (!password) setPasswordError(true);
             return;
         }
 
-        const fields = { name, email, password, role, schoolName }
+        const fields = { name, email, password, role, collegeName }
         setLoader(true)
         dispatch(registerUser(fields, role))
     };
@@ -57,7 +57,7 @@ const AdminRegisterPage = () => {
         if (name === 'email') setEmailError(false);
         if (name === 'password') setPasswordError(false);
         if (name === 'adminName') setAdminNameError(false);
-        if (name === 'schoolName') setSchoolNameError(false);
+        if (name === 'collegeName') setCollegeNameError(false);
     };
 
     useEffect(() => {
@@ -92,7 +92,7 @@ const AdminRegisterPage = () => {
                             Admin Register
                         </Typography>
                         <Typography variant="h7">
-                            Create your own school by registering as an admin.
+                            Create your own college by registering as an admin.
                             <br />
                             You will be able to add students and faculty and
                             manage the system.
@@ -115,12 +115,12 @@ const AdminRegisterPage = () => {
                                 margin="normal"
                                 required
                                 fullWidth
-                                id="schoolName"
-                                label="Create your school name"
-                                name="schoolName"
+                                id="collegeName"
+                                label="Create your college name"
+                                name="collegeName"
                                 autoComplete="off"
-                                error={schoolNameError}
-                                helperText={schoolNameError && 'School name is required'}
+                                error={collegeNameError}
+                                helperText={collegeNameError && 'College name is required'}
                                 onChange={handleInputChange}
                             />
                             <TextField
