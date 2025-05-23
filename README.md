@@ -9,7 +9,6 @@ To provide an efficient, digital platform for educational institutions to manage
 - **Frontend:** React.js
 - **Backend:** Node.js + Express.js
 - **Database:** MongoDB
-- **Platform:** Developed on Lenovo Ideapad Gaming 3 (8GB RAM)
 
 ## 🚀 Features
 
@@ -51,7 +50,3 @@ To provide an efficient, digital platform for educational institutions to manage
 - Atharve Agrawal (admin)
 - Piyush Chawla (https://github.com/piyush31508)
 - Sajal Tiwari (https://github.com/sajal9685)
-
-## 🏫 Institute
-Baderia Global Institute of Engineering & Management, Jabalpur  
-Affiliated to RGPV, Bhopal
