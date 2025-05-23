@@ -1,4 +1,4 @@
-# Smart Classroom Management Software
+# EduVise - Smart Classroom Management Software
 
 A MERN Stack-based full-stack web application aimed at enhancing the learning environment by streamlining classroom management and academic interactions.
 
@@ -48,9 +48,9 @@ To provide an efficient, digital platform for educational institutions to manage
 - Auto attendance using facial recognition or QR codes
 
 ## 👨‍💻 Contributors
-- Dheeraj Kesharwani  
-- Atharve Agrawal  
-- Arya Gupta
+- Atharve Agrawal (admin)
+- Piyush Chawla (https://github.com/piyush31508)
+- Sajal Tiwari (https://github.com/sajal9685)
 
 ## 🏫 Institute
 Baderia Global Institute of Engineering & Management, Jabalpur  
