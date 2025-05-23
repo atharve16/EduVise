@@ -13,7 +13,7 @@ import {
     getError,
 } from './userSlice';
 
-const REACT_APP_BASE_URL = "https://eduvise.onrender.com";
+const REACT_APP_BASE_URL = "https://eduvise-server.onrender.com";
 
 export const loginUser = (fields, role) => async (dispatch) => {
     dispatch(authRequest());

@@ -16,22 +16,26 @@ import styled from 'styled-components';
 import SpeedDialTemplate from '../../../components/SpeedDialTemplate';
 import Popup from '../../../components/Popup';
 
-const ShowClasses = () => {
+const ShowBranches = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch();
 
   const { sclassesList, loading, error, getresponse } = useSelector((state) => state.sclass);
   const { currentUser } = useSelector(state => state.user)
 
-  const adminID = currentUser._id
+  const adminID = currentUser?._id
 
   useEffect(() => {
-    dispatch(getAllSclasses(adminID, "Sclass"));
+    if (adminID) {
+      dispatch(getAllSclasses(adminID, "Sclass"));
+    }
   }, [adminID, dispatch]);
 
-  if (error) {
-    console.log(error)
-  }
+  useEffect(() => {
+    if (error) {
+      console.log(error)
+    }
+  }, [error]);
 
   const [showPopup, setShowPopup] = useState(false);
   const [message, setMessage] = useState("");
@@ -48,15 +52,15 @@ const ShowClasses = () => {
   }
 
   const sclassColumns = [
-    { id: 'name', label: 'Class Name', minWidth: 170 },
+    { id: 'name', label: 'Branch Name', minWidth: 170 },
   ]
 
-  const sclassRows = sclassesList && sclassesList.length > 0 && sclassesList.map((sclass) => {
+  const sclassRows = sclassesList && sclassesList.length > 0 ? sclassesList.map((sclass) => {
     return {
       name: sclass.sclassName,
       id: sclass._id,
     };
-  })
+  }) : []
 
   const SclassButtonHaver = ({ row }) => {
     const actions = [
@@ -118,8 +122,8 @@ const ShowClasses = () => {
           transformOrigin={{ horizontal: 'right', vertical: 'top' }}
           anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
         >
-          {actions.map((action) => (
-            <MenuItem onClick={action.action}>
+          {actions.map((action, index) => (
+            <MenuItem key={index} onClick={action.action}>
               <ListItemIcon fontSize="small">
                 {action.icon}
               </ListItemIcon>
@@ -133,43 +137,41 @@ const ShowClasses = () => {
 
   const actions = [
     {
-      icon: <AddCardIcon color="primary" />, name: 'Add New Class',
+      icon: <AddCardIcon color="primary" />, name: 'Add New Branch',
       action: () => navigate("/Admin/addclass")
     },
     {
-      icon: <DeleteIcon color="error" />, name: 'Delete All Classes',
+      icon: <DeleteIcon color="error" />, name: 'Delete All Branches',
       action: () => deleteHandler(adminID, "Sclasses")
     },
   ];
 
   return (
     <>
-      {loading ?
+      {loading ? (
         <div>Loading...</div>
-        :
+      ) : (
         <>
-          {getresponse ?
+          {!sclassesList || sclassesList.length === 0 || getresponse ? (
             <Box sx={{ display: 'flex', justifyContent: 'flex-end', marginTop: '16px' }}>
               <GreenButton variant="contained" onClick={() => navigate("/Admin/addclass")}>
-                Add Class
+                Add Branch
               </GreenButton>
             </Box>
-            :
+          ) : (
             <>
-              {Array.isArray(sclassesList) && sclassesList.length > 0 &&
-                <TableTemplate buttonHaver={SclassButtonHaver} columns={sclassColumns} rows={sclassRows} />
-              }
+              <TableTemplate buttonHaver={SclassButtonHaver} columns={sclassColumns} rows={sclassRows} />
               <SpeedDialTemplate actions={actions} />
-            </>}
+            </>
+          )}
         </>
-      }
+      )}
       <Popup message={message} setShowPopup={setShowPopup} showPopup={showPopup} />
-
     </>
   );
 };
 
-export default ShowClasses;
+export default ShowBranches;
 
 const styles = {
   styledPaper: {

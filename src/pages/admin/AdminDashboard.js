@@ -37,9 +37,9 @@ import ChooseSubject from './teacherRelated/ChooseSubject';
 import ShowTeachers from './teacherRelated/ShowTeachers';
 import TeacherDetails from './teacherRelated/TeacherDetails';
 
-import AddClass from './classRelated/AddClass';
-import ClassDetails from './classRelated/ClassDetails';
-import ShowClasses from './classRelated/ShowClasses';
+import AddBranch from './classRelated/AddBranch';
+import BranchDetails from './classRelated/BranchDetails';
+import ShowBranches from './classRelated/ShowBranches';
 import AccountMenu from '../../components/AccountMenu';
 
 const AdminDashboard = () => {
@@ -114,9 +114,9 @@ const AdminDashboard = () => {
                         <Route path="/Admin/subject/student/marks/:studentID/:subjectID" element={<StudentExamMarks situation="Subject" />} />
 
                         {/* Class */}
-                        <Route path="/Admin/addclass" element={<AddClass />} />
-                        <Route path="/Admin/classes" element={<ShowClasses />} />
-                        <Route path="/Admin/classes/class/:id" element={<ClassDetails />} />
+                        <Route path="/Admin/addclass" element={<AddBranch />} />
+                        <Route path="/Admin/classes" element={<ShowBranches />} />
+                        <Route path="/Admin/classes/class/:id" element={<BranchDetails />} />
                         <Route path="/Admin/class/addstudents/:id" element={<AddStudent situation="Class" />} />
 
                         {/* Student */}

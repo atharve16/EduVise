@@ -3,9 +3,9 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
     sclassesList: [],
     sclassStudents: [],
-    sclassDetails: [],
+    sclassDetails: {},
     subjectsList: [],
-    subjectDetails: [],
+    subjectDetails: {},
     loading: false,
     subloading: false,
     error: null,
@@ -19,9 +19,11 @@ const sclassSlice = createSlice({
     reducers: {
         getRequest: (state) => {
             state.loading = true;
+            state.error = null;
         },
         getSubDetailsRequest: (state) => {
             state.subloading = true;
+            state.error = null;
         },
         getSuccess: (state, action) => {
             state.sclassesList = action.payload;
@@ -56,6 +58,7 @@ const sclassSlice = createSlice({
         },
         getError: (state, action) => {
             state.loading = false;
+            state.subloading = false;
             state.error = action.payload;
         },
         detailsSuccess: (state, action) => {
@@ -70,7 +73,16 @@ const sclassSlice = createSlice({
         },
         resetSubjects: (state) => {
             state.subjectsList = [];
+            state.response = null;
+        },
+        resetSclasses: (state) => {
             state.sclassesList = [];
+            state.getresponse = null;
+        },
+        clearErrors: (state) => {
+            state.error = null;
+            state.response = null;
+            state.getresponse = null;
         },
     },
 });
@@ -85,8 +97,10 @@ export const {
     detailsSuccess,
     getFailedTwo,
     resetSubjects,
-    getSubDetailsSuccess,
-    getSubDetailsRequest
+    resetSclasses,
+    clearErrors,
+    getSubDetailsRequest,
+    getSubDetailsSuccess
 } = sclassSlice.actions;
 
-export const sclassReducer = sclassSlice.reducer;
+export default sclassSlice.reducer;

@@ -9,7 +9,7 @@ import Popup from "../../../components/Popup";
 import Classroom from "../../../assets/classroom.png";
 import styled from "styled-components";
 
-const AddClass = () => {
+const AddBranch = () => {
     const [sclassName, setSclassName] = useState("");
 
     const dispatch = useDispatch()
@@ -18,7 +18,7 @@ const AddClass = () => {
     const userState = useSelector(state => state.user);
     const { status, currentUser, response, error, tempDetails } = userState;
 
-    const adminID = currentUser._id
+    const adminID = currentUser?._id
     const address = "Sclass"
 
     const [loader, setLoader] = useState(false)
@@ -32,6 +32,16 @@ const AddClass = () => {
 
     const submitHandler = (event) => {
         event.preventDefault()
+        if (!sclassName.trim()) {
+            setMessage("Please enter a branch name")
+            setShowPopup(true)
+            return
+        }
+        if (!adminID) {
+            setMessage("Admin ID not found. Please login again.")
+            setShowPopup(true)
+            return
+        }
         setLoader(true)
         dispatch(addStuff(fields, address))
     };
@@ -43,16 +53,17 @@ const AddClass = () => {
             setLoader(false)
         }
         else if (status === 'failed') {
-            setMessage(response)
+            setMessage(response || "Failed to create branch")
             setShowPopup(true)
             setLoader(false)
         }
         else if (status === 'error') {
-            setMessage("Network Error")
+            setMessage("Network Error. Please try again.")
             setShowPopup(true)
             setLoader(false)
         }
     }, [status, navigate, error, response, dispatch, tempDetails]);
+
     return (
         <>
             <StyledContainer>
@@ -70,13 +81,15 @@ const AddClass = () => {
                     <form onSubmit={submitHandler}>
                         <Stack spacing={3}>
                             <TextField
-                                label="Create a class"
+                                label="Create a branch"
                                 variant="outlined"
                                 value={sclassName}
                                 onChange={(event) => {
                                     setSclassName(event.target.value);
                                 }}
                                 required
+                                fullWidth
+                                placeholder="Enter branch name (e.g., Computer Science, Mechanical, etc.)"
                             />
                             <BlueButton
                                 fullWidth
@@ -86,7 +99,7 @@ const AddClass = () => {
                                 type="submit"
                                 disabled={loader}
                             >
-                                {loader ? <CircularProgress size={24} color="inherit" /> : "Create"}
+                                {loader ? <CircularProgress size={24} color="inherit" /> : "Create Branch"}
                             </BlueButton>
                             <Button variant="outlined" onClick={() => navigate(-1)}>
                                 Go Back
@@ -100,17 +113,20 @@ const AddClass = () => {
     )
 }
 
-export default AddClass
+export default AddBranch
 
 const StyledContainer = styled(Box)`
   flex: 1 1 auto;
   align-items: center;
   display: flex;
   justify-content: center;
+  min-height: 100vh;
+  padding: 20px;
 `;
 
 const StyledBox = styled(Box)`
   max-width: 550px;
+  width: 100%;
   padding: 50px 3rem 50px;
   margin-top: 1rem;
   background-color: white;

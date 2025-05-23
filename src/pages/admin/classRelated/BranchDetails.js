@@ -19,7 +19,7 @@ import Popup from "../../../components/Popup";
 import DeleteIcon from "@mui/icons-material/Delete";
 import PostAddIcon from '@mui/icons-material/PostAdd';
 
-const ClassDetails = () => {
+const BranchDetails = () => {
     const params = useParams()
     const navigate = useNavigate()
     const dispatch = useDispatch();
@@ -28,14 +28,18 @@ const ClassDetails = () => {
     const classID = params.id
 
     useEffect(() => {
-        dispatch(getClassDetails(classID, "Sclass"));
-        dispatch(getSubjectList(classID, "ClassSubjects"))
-        dispatch(getClassStudents(classID));
+        if (classID) {
+            dispatch(getClassDetails(classID, "Sclass"));
+            dispatch(getSubjectList(classID, "ClassSubjects"))
+            dispatch(getClassStudents(classID));
+        }
     }, [dispatch, classID])
 
-    if (error) {
-        console.log(error)
-    }
+    useEffect(() => {
+        if (error) {
+            console.log(error)
+        }
+    }, [error]);
 
     const [value, setValue] = useState('1');
 
@@ -64,13 +68,13 @@ const ClassDetails = () => {
         { id: 'code', label: 'Subject Code', minWidth: 100 },
     ]
 
-    const subjectRows = subjectsList && subjectsList.length > 0 && subjectsList.map((subject) => {
+    const subjectRows = subjectsList && subjectsList.length > 0 ? subjectsList.map((subject) => {
         return {
             name: subject.subName,
             code: subject.subCode,
             id: subject._id,
         };
-    })
+    }) : []
 
     const SubjectsButtonHaver = ({ row }) => {
         return (
@@ -101,10 +105,10 @@ const ClassDetails = () => {
         }
     ];
 
-    const ClassSubjectsSection = () => {
+    const BranchSubjectsSection = () => {
         return (
             <>
-                {response ?
+                {!subjectsList || subjectsList.length === 0 || response ? (
                     <Box sx={{ display: 'flex', justifyContent: 'flex-end', marginTop: '16px' }}>
                         <GreenButton
                             variant="contained"
@@ -113,7 +117,7 @@ const ClassDetails = () => {
                             Add Subjects
                         </GreenButton>
                     </Box>
-                    :
+                ) : (
                     <>
                         <Typography variant="h5" gutterBottom>
                             Subjects List:
@@ -122,7 +126,7 @@ const ClassDetails = () => {
                         <TableTemplate buttonHaver={SubjectsButtonHaver} columns={subjectColumns} rows={subjectRows} />
                         <SpeedDialTemplate actions={subjectActions} />
                     </>
-                }
+                )}
             </>
         )
     }
@@ -132,13 +136,13 @@ const ClassDetails = () => {
         { id: 'rollNum', label: 'Roll Number', minWidth: 100 },
     ]
 
-    const studentRows = sclassStudents.map((student) => {
+    const studentRows = sclassStudents && sclassStudents.length > 0 ? sclassStudents.map((student) => {
         return {
             name: student.name,
             rollNum: student.rollNum,
             id: student._id,
         };
-    })
+    }) : []
 
     const StudentsButtonHaver = ({ row }) => {
         return (
@@ -175,10 +179,10 @@ const ClassDetails = () => {
         },
     ];
 
-    const ClassStudentsSection = () => {
+    const BranchStudentsSection = () => {
         return (
             <>
-                {getresponse ? (
+                {!sclassStudents || sclassStudents.length === 0 || getresponse ? (
                     <>
                         <Box sx={{ display: 'flex', justifyContent: 'flex-end', marginTop: '16px' }}>
                             <GreenButton
@@ -203,25 +207,30 @@ const ClassDetails = () => {
         )
     }
 
-    const ClassTeachersSection = () => {
+    const BranchTeachersSection = () => {
         return (
             <>
-                Teachers
+                <Typography variant="h5" gutterBottom>
+                    Teachers Section
+                </Typography>
+                <Typography variant="body1">
+                    Teachers functionality will be implemented here.
+                </Typography>
             </>
         )
     }
 
-    const ClassDetailsSection = () => {
-        const numberOfSubjects = subjectsList.length;
-        const numberOfStudents = sclassStudents.length;
+    const BranchDetailsSection = () => {
+        const numberOfSubjects = subjectsList ? subjectsList.length : 0;
+        const numberOfStudents = sclassStudents ? sclassStudents.length : 0;
 
         return (
             <>
                 <Typography variant="h4" align="center" gutterBottom>
-                    Class Details
+                    Branch Details
                 </Typography>
                 <Typography variant="h5" gutterBottom>
-                    This is Class {sclassDetails && sclassDetails.sclassName}
+                    This is Branch: {sclassDetails && sclassDetails.sclassName}
                 </Typography>
                 <Typography variant="h6" gutterBottom>
                     Number of Subjects: {numberOfSubjects}
@@ -229,22 +238,25 @@ const ClassDetails = () => {
                 <Typography variant="h6" gutterBottom>
                     Number of Students: {numberOfStudents}
                 </Typography>
-                {getresponse &&
-                    <GreenButton
-                        variant="contained"
-                        onClick={() => navigate("/Admin/class/addstudents/" + classID)}
-                    >
-                        Add Students
-                    </GreenButton>
-                }
-                {response &&
-                    <GreenButton
-                        variant="contained"
-                        onClick={() => navigate("/Admin/addsubject/" + classID)}
-                    >
-                        Add Subjects
-                    </GreenButton>
-                }
+                
+                <Box sx={{ display: 'flex', gap: 2, mt: 3, flexWrap: 'wrap' }}>
+                    {(!sclassStudents || sclassStudents.length === 0) && (
+                        <GreenButton
+                            variant="contained"
+                            onClick={() => navigate("/Admin/class/addstudents/" + classID)}
+                        >
+                            Add Students
+                        </GreenButton>
+                    )}
+                    {(!subjectsList || subjectsList.length === 0) && (
+                        <GreenButton
+                            variant="contained"
+                            onClick={() => navigate("/Admin/addsubject/" + classID)}
+                        >
+                            Add Subjects
+                        </GreenButton>
+                    )}
+                </Box>
             </>
         );
     }
@@ -267,16 +279,16 @@ const ClassDetails = () => {
                             </Box>
                             <Container sx={{ marginTop: "3rem", marginBottom: "4rem" }}>
                                 <TabPanel value="1">
-                                    <ClassDetailsSection />
+                                    <BranchDetailsSection />
                                 </TabPanel>
                                 <TabPanel value="2">
-                                    <ClassSubjectsSection />
+                                    <BranchSubjectsSection />
                                 </TabPanel>
                                 <TabPanel value="3">
-                                    <ClassStudentsSection />
+                                    <BranchStudentsSection />
                                 </TabPanel>
                                 <TabPanel value="4">
-                                    <ClassTeachersSection />
+                                    <BranchTeachersSection />
                                 </TabPanel>
                             </Container>
                         </TabContext>
@@ -288,4 +300,4 @@ const ClassDetails = () => {
     );
 };
 
-export default ClassDetails;
+export default BranchDetails;

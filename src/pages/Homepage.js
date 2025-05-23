@@ -15,16 +15,12 @@ const Homepage = () => {
                 <Grid item xs={12} md={6}>
                     <StyledPaper elevation={3}>
                         <StyledTitle>
-                            Welcome to
-                            <br />
-                            College Management
-                            <br />
-                            System
+                            Welcome to <span style={{color:"rgb(83, 148, 222)"}} >EduVise</span>
                         </StyledTitle>
                         <StyledText>
-                            Streamline college management, class organization, and add students and faculty.
-                            Seamlessly track attendance, assess performance, and provide feedback.
-                            Access records, view marks, and communicate effortlessly.
+                            - Your Smart Classroom Companion 📚
+                            <br />
+                            ✨ Experience the future of education with EduVise – where classrooms become smarter, and learning becomes better.
                         </StyledText>
                         <StyledBox>
                             <StyledLink to="/choose">
@@ -34,14 +30,14 @@ const Homepage = () => {
                             </StyledLink>
                             <StyledLink to="/chooseasguest">
                                 <Button variant="outlined" fullWidth
-                                    sx={{ mt: 2, mb: 3, color: "#7f56da", borderColor: "#7f56da" }}
+                                    sx={{ mt: 2, mb: 3, color: "rgb(83, 148, 222)", borderColor: "rgb(83, 148, 222)" }}
                                 >
                                     Login as Guest
                                 </Button>
                             </StyledLink>
                             <StyledText>
                                 Don't have an account?{' '}
-                                <Link to="/Adminregister" style={{color:"#550080"}}>
+                                <Link to="/Adminregister" style={{color:"rgb(83, 148, 222)"}}>
                                     Sign up
                                 </Link>
                             </StyledText>
@@ -87,7 +83,7 @@ const StyledTitle = styled.h1`
 `;
 
 const StyledText = styled.p`
-  /* color: #550080; */
+  /* color: rgb(83, 148, 222); */
   margin-top: 30px;
   margin-bottom: 30px; 
   letter-spacing: normal;
