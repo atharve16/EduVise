@@ -44,10 +44,6 @@ const Homepage = () => {
                         </StyledBox>
                         
                         <AttributionWrapper>
-                            // <AttributionText>
-                            //     ✨ Initiated and Developed by{' '}
-                            //     <DeveloperName>Atharve Agrawal</DeveloperName>
-                            // </AttributionText>
                             <AttributionSubtext>
                                 Crafted with ❤️ for the future of education
                             </AttributionSubtext>
