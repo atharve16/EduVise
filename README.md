@@ -49,4 +49,4 @@ To provide an efficient, digital platform for educational institutions to manage
 ## 👨‍💻 Contributors
 - Atharve Agrawal (admin)
 - Piyush Chawla (https://github.com/piyush31508)
-- Sajal Tiwari (https://github.com/sajal9685)
+- Sajal Chaturvedi (https://github.com/sajal9685)
